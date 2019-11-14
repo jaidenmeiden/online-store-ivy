@@ -6,8 +6,8 @@ import * as FileSaver from 'file-saver';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
-import { ProductsService } from '@core/services/products/products.service';
-import { Product } from '@core/models/product.model';
+import { ProductsService } from './../../../core/services/products/products.service';
+import { Product } from './../../../core/models/product.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -25,11 +25,11 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {
     this.product$ = this.route.params
-      .pipe(
-        switchMap((params: Params) => {
-          return this.productsService.getProduct(params.id);
-        })
-      );
+    .pipe(
+      switchMap((params: Params) => {
+        return this.productsService.getProduct(params.id);
+      })
+    );
   }
 
   createProduct() {
@@ -66,23 +66,23 @@ export class ProductDetailComponent implements OnInit {
 
   getRandomUsers() {
     this.productsService.getRandomUsers()
-      .subscribe(
-        users => { // bien
-          console.log(users);
-        },
-        error => {
-          console.error(error);
-        }
-      );
+    .subscribe(
+      users => { // bien
+        console.log(users);
+      },
+      error => {
+        console.error(error);
+      }
+    );
   }
 
   getFile() {
     this.productsService.getFile()
-      .subscribe(content => {
-        console.log(content);
-        const blob = new Blob([content], {type: 'text/plain;charset=utf-8'});
-        FileSaver.saveAs(blob, 'archivo.txt');
-      });
+    .subscribe(content => {
+      console.log(content);
+      const blob = new Blob([content], {type: 'text/plain;charset=utf-8'});
+      FileSaver.saveAs(blob, 'hello world.txt');
+    });
   }
 
 }
